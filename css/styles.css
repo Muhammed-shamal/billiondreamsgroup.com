@@ -1,0 +1,319 @@
+/* ============================================================
+   Billion Dreams Group — Coming Soon
+   Theme: black · gold · white (matches brand logo)
+   ============================================================ */
+
+:root {
+  --black: #000000;
+  --panel: #0d0d0d;
+  --white: #ffffff;
+  --muted: #b8b8b8;
+  --dim: #7a7a7a;
+
+  /* Brand gold gradient (pulled from the logo) */
+  --gold-1: #f7e07f;
+  --gold-2: #d4af37;
+  --gold-3: #b8860b;
+  --gold-line: rgba(212, 175, 55, 0.35);
+
+  --gold-gradient: linear-gradient(135deg, var(--gold-1), var(--gold-2) 55%, var(--gold-3));
+
+  --maxw: 1040px;
+  --font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ambient gold glow behind the content */
+.glow {
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  max-width: 120vw;
+  height: 900px;
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.16) 0%,
+    rgba(212, 175, 55, 0.05) 35%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.75; transform: translateX(-50%) scale(1); }
+  50%      { opacity: 1;    transform: translateX(-50%) scale(1.08); }
+}
+
+/* ---------- Layout ---------- */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) 1.5rem clamp(2rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+  min-height: 100vh;
+}
+
+/* ---------- Brand / logo ---------- */
+.brand {
+  animation: fadeUp 0.9s ease both;
+}
+
+.logo {
+  width: clamp(190px, 34vw, 300px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 24px rgba(212, 175, 55, 0.18));
+}
+
+.logo-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.logo-fallback .bd {
+  font-size: clamp(3rem, 9vw, 4.5rem);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -2px;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.logo-fallback .wordmark {
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  font-size: clamp(0.9rem, 3vw, 1.3rem);
+}
+.logo-fallback .wordmark em {
+  font-style: normal;
+  color: var(--gold-2);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  animation: fadeUp 0.9s ease 0.12s both;
+  max-width: 720px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold-2);
+  margin-bottom: 1.1rem;
+  padding-left: 0.42em; /* balance the tracking */
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 5.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.hero .gold {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero .lede {
+  margin-top: 1.4rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  font-weight: 300;
+}
+
+/* ---------- Sectors ---------- */
+.sectors {
+  animation: fadeUp 0.9s ease 0.24s both;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.sector {
+  background: linear-gradient(160deg, var(--panel), #050505);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.6rem 1.4rem;
+  text-align: left;
+  transition: transform 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.sector:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold-line);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(212, 175, 55, 0.12);
+}
+
+.sector-status {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.9rem;
+}
+.sector-status.live {
+  color: #0a0a0a;
+  background: var(--gold-gradient);
+}
+.sector-status.future {
+  color: var(--gold-1);
+  border: 1px solid var(--gold-line);
+  background: transparent;
+}
+
+.sector h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.sector p {
+  font-size: 0.9rem;
+  color: var(--dim);
+  font-weight: 300;
+}
+
+/* ---------- Notify ---------- */
+.notify {
+  animation: fadeUp 0.9s ease 0.36s both;
+  width: 100%;
+  max-width: 480px;
+}
+.notify-label {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+.notify-form {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.notify-form input {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.notify-form input::placeholder {
+  color: var(--dim);
+}
+.notify-form input:focus {
+  border-color: var(--gold-2);
+  background: rgba(212, 175, 55, 0.06);
+}
+.notify-form button {
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--gold-gradient);
+  color: #0a0a0a;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.notify-form button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+}
+.notify-hint {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--dim);
+}
+
+/* ---------- Footer ---------- */
+.foot {
+  animation: fadeUp 0.9s ease 0.48s both;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  width: 100%;
+}
+.foot a {
+  color: var(--gold-2);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+.foot a:hover {
+  color: var(--gold-1);
+}
+.foot .copy {
+  font-size: 0.78rem;
+  color: var(--dim);
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, .glow { animation: none !important; }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 520px) {
+  .sectors { grid-template-columns: 1fr; }
+  .eyebrow { letter-spacing: 0.3em; }
+}

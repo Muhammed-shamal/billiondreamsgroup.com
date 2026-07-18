@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billion Dreams Group — Coming Soon</title>
+  <meta
+    name="description"
+    content="Billion Dreams Group — Interiors &amp; Landscapes, Perfumes, Venture Capital, and Fitness. Something extraordinary is on the way."
+  />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Social sharing -->
+  <meta property="og:title" content="Billion Dreams Group — Coming Soon" />
+  <meta
+    property="og:description"
+    content="One group. Many dreams. Interiors &amp; Landscapes, Perfumes, Venture Capital, and Fitness."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logo.jpeg" />
+
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpeg" />
+  <link rel="apple-touch-icon" href="assets/logo.jpeg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main class="page">
+    <header class="brand">
+      <img
+        src="assets/logo.jpeg"
+        alt="Billion Dreams"
+        class="logo"
+        onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='block';"
+      />
+      <div id="logoFallback" class="logo-fallback" style="display:none;">
+        <span class="bd">BD</span>
+        <span class="wordmark">BILLION <em>DREAMS</em></span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">Billion Dreams Group</p>
+      <h1>Something extraordinary is<br /><span class="gold">on the way</span></h1>
+      <p class="lede">
+        We're crafting our new home. One group, many dreams — spanning design,
+        lifestyle, and investment.
+      </p>
+    </section>
+
+    <section class="sectors" aria-label="Our ventures">
+      <article class="sector">
+        <span class="sector-status live">Live soon</span>
+        <h2>Interiors &amp; Landscapes</h2>
+        <p>Designing spaces that inspire, indoors and out.</p>
+      </article>
+
+      <article class="sector">
+        <span class="sector-status live">Live soon</span>
+        <h2>Perfumes</h2>
+        <p>Signature scents, crafted to be remembered.</p>
+      </article>
+
+      <article class="sector">
+        <span class="sector-status live">Live soon</span>
+        <h2>Venture Capital</h2>
+        <p>Backing bold founders and billion-dollar ideas.</p>
+      </article>
+
+      <article class="sector">
+        <span class="sector-status future">Future</span>
+        <h2>Fitness</h2>
+        <p>Strength, wellness, and performance — coming next.</p>
+      </article>
+    </section>
+
+    <!-- Notify form hidden for now — un-comment this block to re-enable it.
+    <section class="notify">
+      <p class="notify-label">Be the first to know when we launch</p>
+      <form
+        class="notify-form"
+        action="https://formsubmit.co/info@billiondreamsgroup.com"
+        method="POST"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          aria-label="Email address"
+        />
+        <button type="submit">Notify me</button>
+      </form>
+      <p class="notify-hint">No spam — just a single note when we go live.</p>
+    </section>
+    -->
+
+    <footer class="foot">
+      <!-- Contact email hidden for now — un-comment to show it again.
+      <a href="mailto:info@billiondreamsgroup.com">info@billiondreamsgroup.com</a>
+      -->
+      <span class="copy">© <span id="year"></span> Billion Dreams Group. All rights reserved.</span>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
