@@ -1,7 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import logo from "../assets/logo.jpeg";
 
 const ventures = [
   {
@@ -40,22 +38,27 @@ const ventures = [
 ---
 
 <Layout title="Billion Dreams Group — One Group, Many Dreams">
-  <section class="hero">
+  <section class="home-hero">
     <div class="container">
-      <Image
-        src={logo}
-        alt="Billion Dreams"
-        class="brand-logo fade-up"
-        width={640}
-        height={429}
-      />
-      <p class="eyebrow fade-up d1">Billion Dreams Group</p>
+      <p class="kicker fade-up"><span></span>Billion Dreams Group<span></span></p>
       <h1 class="fade-up d1">One group.<br /><span class="gold">Many dreams.</span></h1>
       <p class="lede fade-up d2">
-        A multi-sector group spanning design, lifestyle and investment — built on
-        craft, ambition and an eye for detail.
+        A multi-sector group spanning interiors &amp; landscapes, perfumes,
+        venture capital and fitness — united by craft, ambition and an eye for detail.
       </p>
+      <div class="cta-row fade-up d3">
+        <a href="/interiors" class="btn btn-gold">Explore Interiors →</a>
+        <a href="#ventures" class="btn btn-ghost">Our ventures</a>
+      </div>
+      <ul class="hero-meta fade-up d3">
+        <li>Four ventures</li>
+        <li>UAE &amp; India</li>
+        <li>Design · Lifestyle · Investment</li>
+      </ul>
     </div>
+    <a href="#ventures" class="scroll-cue" aria-label="Scroll to ventures">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </a>
   </section>
 
   <section class="section" id="ventures">

@@ -166,37 +166,114 @@ a { color: inherit; text-decoration: none; }
 .nav a.is-active { color: var(--gold-2); }
 .nav .soon { font-size: 0.6rem; color: var(--dim); margin-left: 0.25rem; }
 
-/* ---------- Hero (generic) ---------- */
-.hero {
+/* ---------- Home hero (typographic) ---------- */
+.home-hero {
   position: relative;
   z-index: 1;
+  min-height: min(92vh, 900px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(4.5rem, 9vw, 7rem);
+  overflow: hidden;
 }
-.hero .brand-logo {
-  width: clamp(200px, 34vw, 320px);
-  height: auto;
-  margin: 0 auto 1.8rem;
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(60% 48% at 50% 0%, rgba(212, 175, 55, 0.1), transparent 70%);
+  pointer-events: none;
 }
-.hero h1 {
-  font-size: clamp(2rem, 6vw, 3.6rem);
+.home-hero .kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--gold-2);
+  padding-left: 0.4em;
+  margin-bottom: 1.7rem;
+}
+.home-hero .kicker span {
+  display: block;
+  width: clamp(24px, 6vw, 56px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-line));
+}
+.home-hero .kicker span:last-child {
+  background: linear-gradient(90deg, var(--gold-line), transparent);
+}
+.home-hero h1 {
+  font-size: clamp(2rem, 8.5vw, 5.2rem);
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
 }
-.hero .lede {
-  margin: 1.3rem auto 0;
-  max-width: 640px;
+.home-hero .lede {
+  margin: 1.6rem auto 0;
+  max-width: 620px;
   color: var(--muted);
   font-weight: 300;
-  font-size: clamp(1rem, 2.4vw, 1.18rem);
+  font-size: clamp(1.02rem, 2.4vw, 1.2rem);
 }
-.hero .cta-row {
-  margin-top: 2rem;
+.home-hero .cta-row {
+  margin-top: 2.2rem;
   display: flex;
   gap: 0.8rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+.home-hero .hero-meta {
+  list-style: none;
+  margin: 2.6rem 0 0;
+  padding: 0;
+  display: flex;
+  gap: clamp(0.9rem, 3vw, 1.8rem);
+  justify-content: center;
+  flex-wrap: wrap;
+  color: var(--dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+.home-hero .hero-meta li {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 3vw, 1.8rem);
+}
+.home-hero .hero-meta li:not(:first-child)::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold-2);
+  opacity: 0.7;
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--gold-2);
+  background: rgba(0, 0, 0, 0.3);
+  animation: bob 2.2s ease-in-out infinite;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.scroll-cue svg { width: 18px; height: 18px; }
+.scroll-cue:hover { border-color: var(--gold-line); background: rgba(212, 175, 55, 0.08); }
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
 }
 
 /* Page hero with background image (sector pages) */
@@ -445,7 +522,23 @@ a { color: inherit; text-decoration: none; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
 }
+/* Stack the header (logo over centered nav) on small screens */
+@media (max-width: 640px) {
+  .site-header { height: auto; }
+  .site-header .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+  .site-header .logo { height: 34px; }
+  .nav { width: 100%; justify-content: center; gap: 0.5rem 1rem; }
+  .nav a { font-size: 0.8rem; }
+}
+
 @media (max-width: 520px) {
   .eyebrow { letter-spacing: 0.3em; }
   .footer-top { grid-template-columns: 1fr; }
+  .home-hero .cta-row .btn { flex: 1 1 auto; justify-content: center; }
 }
