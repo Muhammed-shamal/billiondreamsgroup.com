@@ -1,0 +1,10 @@
+# Netlify build configuration for the Astro static site.
+# This overrides any dashboard settings, so the deploy always builds correctly.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro 7 needs a modern Node runtime.
+  NODE_VERSION = "20"
