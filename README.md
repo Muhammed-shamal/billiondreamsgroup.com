@@ -56,6 +56,11 @@ npm run preview    # serve the built dist/ locally
   `src/assets/interiors/gallery/` (or `.../workshop/`). They're picked up
   automatically, optimized, and shown — no code change needed. Filenames sort
   alphabetically, so prefix with numbers to control order.
+- **Compress big source photos:** phone photos are often 12 MP / multiple MB.
+  After adding large images, run `npm run compress` — it downscales anything
+  over 1920px and re-encodes it in place (originals stay safe in `assets/`).
+  Astro then generates the small responsive WebP variants at build time. The
+  script skips images that are already small, so it's safe to re-run.
 - **Interiors copy, machinery, contacts:** edit `src/pages/interiors.astro`.
 - **Ventures on the homepage:** edit the `ventures` array in `src/pages/index.astro`.
 - **Coming-soon pages:** edit `src/pages/perfumes.astro`, `ventures.astro`, `fitness.astro`.
