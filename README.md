@@ -84,5 +84,3 @@ npm run preview    # serve the built dist/ locally
 - **Netlify / Vercel** — connect the repo (build: `npm run build`, publish: `dist`).
 - **GitHub Pages** — publish the `dist/` folder.
 - **cPanel / shared hosting** — upload the contents of `dist/` to `public_html`.
-
-Point `billiondreamsgroup.com` at the host.
