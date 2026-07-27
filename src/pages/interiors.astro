@@ -1,0 +1,247 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import heroImg from "../assets/interiors/hero.jpg";
+
+// Auto-collect gallery + workshop images (drop files in the folders to add more)
+const galleryModules = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/interiors/gallery/*.{jpg,jpeg,png}",
+  { eager: true },
+);
+const gallery = Object.entries(galleryModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, m]) => m.default);
+
+const workshopModules = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/interiors/workshop/*.{jpg,jpeg,png}",
+  { eager: true },
+);
+const workshop = Object.entries(workshopModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, m]) => m.default);
+
+const machines = [
+  {
+    n: "01",
+    name: "Automatic Edgebander",
+    body: "A through-feed fully automatic edgebanding machine for precise, factory-clean edgebands and trimming on every panel.",
+  },
+  {
+    n: "02",
+    name: "Panel Saw",
+    body: "Accurate measurement and cutting of boards and panels, so every piece fits exactly as designed.",
+  },
+  {
+    n: "03",
+    name: "Cold Press",
+    body: "For flawless pasting of veneers and laminates onto substrates — durable, bubble-free surfaces.",
+  },
+];
+---
+
+<Layout
+  title="Billion Dreams Interiors & Landscapes — Commercial & Residential Fit-out"
+  description="Billion Dreams Interiors & Landscapes — commercial and residential interior works, designed, manufactured and installed in-house with fully-equipped precision machinery. UAE & India."
+  active="interiors"
+>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="hero-bg">
+      <Image
+        src={heroImg}
+        alt="Billion Dreams interior — bedroom with stone accent wall and vaulted timber ceiling"
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="container">
+      <p class="eyebrow fade-up">Billion Dreams</p>
+      <h1 class="fade-up d1">Interiors &amp; Landscapes</h1>
+      <p class="lede fade-up d2">
+        Commercial &amp; residential interior works — designed, manufactured and
+        installed in-house, with fully-equipped precision machinery.
+      </p>
+      <div class="cta-row fade-up d3" style="margin-top: 1.6rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+        <a href="#contact" class="btn btn-gold">Get a quote</a>
+        <a href="#work" class="btn btn-ghost">View our work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Who we are</p>
+      <h2 class="section-title">Spaces designed, built and installed — all in-house</h2>
+      <p class="section-lead">
+        From bedrooms and wardrobes to offices, showrooms and full commercial
+        fit-outs, Billion Dreams Interiors handles the entire journey. Our own
+        fully-equipped workshop means precision manufacturing, tight quality
+        control and dependable timelines — across the UAE and India.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+          </div>
+          <h3>Residential Interiors</h3>
+          <p>Wardrobes, bedrooms, kitchens and living spaces — tailored, glossy finishes and smart storage.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M15 21V9h4a2 2 0 0 1 2 2v10"/><path d="M8 7h2M8 11h2M8 15h2"/></svg>
+          </div>
+          <h3>Commercial Interiors</h3>
+          <p>Offices, reception desks, conference rooms and retail — functional, on-brand and built to last.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"/><path d="M3 10h18v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M6 18v2M18 18v2"/></svg>
+          </div>
+          <h3>Bespoke Furniture &amp; Joinery</h3>
+          <p>Sofas, headboards, feature walls and custom units — manufactured to measure in our own workshop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MACHINERY -->
+  <section class="section" style="background:#050505; border-block:1px solid var(--line);">
+    <div class="container">
+      <p class="eyebrow">In-house precision</p>
+      <h2 class="section-title">Fully equipped for commercial &amp; residential work</h2>
+      <p class="section-lead">
+        The machinery behind the finish — the reason our edges, cuts and surfaces
+        come out clean, consistent and built to last.
+      </p>
+
+      <div class="features">
+        {
+          machines.map((m) => (
+            <div class="feature">
+              <div class="ic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>
+              </div>
+              <h3><span style="color:var(--gold-2); font-weight:800; margin-right:.4rem;">{m.n}</span>{m.name}</h3>
+              <p>{m.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSHOP -->
+  {
+    workshop.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <p class="eyebrow">Behind the scenes</p>
+          <h2 class="section-title">Inside our workshop</h2>
+          <div class="gallery">
+            {workshop.map((img) => (
+              <figure>
+                <Image
+                  src={img}
+                  alt="Billion Dreams workshop and manufacturing"
+                  widths={[300, 600, 900]}
+                  sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 30vw"
+                />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- WORK GALLERY -->
+  <section class="section" id="work" style="background:#050505; border-top:1px solid var(--line);">
+    <div class="container">
+      <p class="eyebrow">Our work</p>
+      <h2 class="section-title">A look at what we've delivered</h2>
+      <p class="section-lead">
+        Residential and commercial projects across the UAE and India.
+      </p>
+      <div class="gallery">
+        {
+          gallery.map((img) => (
+            <figure>
+              <Image
+                src={img}
+                alt="Billion Dreams completed interior project"
+                widths={[300, 600, 900]}
+                sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 30vw"
+              />
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="section-title">Let's build your space</h2>
+      <p class="section-lead">
+        Tell us about your project — residential or commercial — and we'll take it
+        from design to installation.
+      </p>
+
+      <div class="contact-grid">
+        <div class="location">
+          <div class="loc-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9 15 15 0 0 1-4-9 15 15 0 0 1 4-9z"/></svg>
+          </div>
+          <h3>United Arab Emirates</h3>
+          <p class="region">Dubai &amp; Sharjah</p>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:+971563600927">+971 56 360 0927</a>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Industrial Area 15, Sharjah</span>
+          </div>
+        </div>
+
+        <div class="location">
+          <div class="loc-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9 15 15 0 0 1-4-9 15 15 0 0 1 4-9z"/></svg>
+          </div>
+          <h3>India</h3>
+          <p class="region">Calicut, Kerala</p>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:+919995555044">+91 99955 55044</a>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Kozhikodenkunnu, Olavanna, Calicut, Kerala</span>
+          </div>
+        </div>
+
+        <div class="location">
+          <div class="loc-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          </div>
+          <h3>Email us</h3>
+          <p class="region">We reply within a day</p>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            <a href="mailto:interiors@billiondreamsgroup.com">interiors@billiondreamsgroup.com</a>
+          </div>
+          <div style="margin-top:1.2rem;">
+            <a href="mailto:interiors@billiondreamsgroup.com" class="btn btn-gold">Start your project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

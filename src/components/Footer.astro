@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.jpeg";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <Image src={logo} alt="Billion Dreams" width={200} height={134} />
+        <p>
+          One group, many dreams — spanning interiors &amp; landscapes, perfumes,
+          venture capital and fitness.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ventures</h4>
+        <a href="/interiors">Interiors &amp; Landscapes</a>
+        <a href="/perfumes">Perfumes</a>
+        <a href="/ventures">Venture Capital</a>
+        <a href="/fitness">Fitness</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Interiors Contact</h4>
+        <a href="tel:+971563600927">+971 56 360 0927 · UAE</a>
+        <a href="tel:+919995555044">+91 99955 55044 · India</a>
+        <a href="mailto:interiors@billiondreamsgroup.com">interiors@billiondreamsgroup.com</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} Billion Dreams Group. All rights reserved.</span>
+      <span>Dubai · Sharjah · Calicut</span>
+    </div>
+  </div>
+</footer>

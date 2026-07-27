@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import logo from "../assets/logo.jpeg";
+
+const ventures = [
+  {
+    title: "Interiors & Landscapes",
+    desc: "Complete commercial & residential interior fit-out, crafted with fully-equipped precision machinery.",
+    href: "/interiors",
+    status: "active",
+    statusText: "Active now",
+    go: "Explore",
+  },
+  {
+    title: "Perfumes",
+    desc: "Signature scents, crafted to be remembered.",
+    href: "/perfumes",
+    status: "soon",
+    statusText: "Coming soon",
+    go: "In the works",
+  },
+  {
+    title: "Venture Capital",
+    desc: "Backing bold founders and billion-dollar ideas.",
+    href: "/ventures",
+    status: "soon",
+    statusText: "Coming soon",
+    go: "In the works",
+  },
+  {
+    title: "Fitness",
+    desc: "Strength, wellness and performance — coming next.",
+    href: "/fitness",
+    status: "future",
+    statusText: "Future",
+    go: "In the works",
+  },
+];
+---
+
+<Layout title="Billion Dreams Group — One Group, Many Dreams">
+  <section class="hero">
+    <div class="container">
+      <Image
+        src={logo}
+        alt="Billion Dreams"
+        class="brand-logo fade-up"
+        width={640}
+        height={429}
+      />
+      <p class="eyebrow fade-up d1">Billion Dreams Group</p>
+      <h1 class="fade-up d1">One group.<br /><span class="gold">Many dreams.</span></h1>
+      <p class="lede fade-up d2">
+        A multi-sector group spanning design, lifestyle and investment — built on
+        craft, ambition and an eye for detail.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="ventures">
+    <div class="container">
+      <div class="center">
+        <p class="eyebrow">Our ventures</p>
+        <h2 class="section-title">Four pursuits, one standard of excellence</h2>
+      </div>
+
+      <div class="ventures" style="margin-top: 2.6rem;">
+        {
+          ventures.map((v) => {
+            const isLink = v.status === "active";
+            return isLink ? (
+              <a class="venture is-link" href={v.href}>
+                <span class:list={["status", v.status]}>{v.statusText}</span>
+                <h3>{v.title}</h3>
+                <p>{v.desc}</p>
+                <span class="go">{v.go} →</span>
+              </a>
+            ) : (
+              <div class="venture">
+                <span class:list={["status", v.status]}>{v.statusText}</span>
+                <h3>{v.title}</h3>
+                <p>{v.desc}</p>
+                <span class="go" style="color: var(--dim);">{v.go}</span>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
