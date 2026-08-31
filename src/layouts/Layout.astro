@@ -7,12 +7,15 @@ interface Props {
   title: string;
   description?: string;
   active?: string;
+  /** Venture theme class applied to <body> — re-skins the accent colour. */
+  theme?: string;
 }
 
 const {
   title,
-  description = "Billion Dreams Group — Interiors & Landscapes, Perfumes, Venture Capital and Fitness. One group, many dreams.",
+  description = "Billion Dreams Group — Interiors, Indish eVolt electric mobility, Logistics, Software Solutions and Gym Equipments. One group, many dreams.",
   active,
+  theme,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -46,7 +49,7 @@ const ogImage = new URL("/logo.jpeg", Astro.site);
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class={theme}>
     <div class="glow" aria-hidden="true"></div>
     <Header active={active} />
     <main>

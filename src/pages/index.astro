@@ -3,35 +3,44 @@ import Layout from "../layouts/Layout.astro";
 
 const ventures = [
   {
-    title: "Interiors & Landscapes",
-    desc: "Complete commercial & residential interior fit-out, crafted with fully-equipped precision machinery.",
+    title: "Billion Dreams Interiors",
+    desc: "Complete commercial & residential interior fit-out, crafted with fully-equipped precision machinery. India and the UAE.",
     href: "/interiors",
     status: "active",
     statusText: "Active now",
     go: "Explore",
   },
   {
-    title: "Perfumes",
-    desc: "Signature scents, crafted to be remembered.",
-    href: "/perfumes",
+    title: "Indish eVolt",
+    desc: "EV charging stations across India — designed, installed, operated and maintained end-to-end.",
+    note: "In association with Indish World",
+    href: "/indish-evolt",
+    status: "active",
+    statusText: "Rolling out",
+    go: "Explore",
+  },
+  {
+    title: "Billion Dreams Logistics",
+    desc: "Moving goods with the same precision we bring to everything else.",
+    href: "/logistics",
     status: "soon",
     statusText: "Coming soon",
     go: "In the works",
   },
   {
-    title: "Venture Capital",
-    desc: "Backing bold founders and billion-dollar ideas.",
-    href: "/ventures",
+    title: "Billion Dreams Software Solutions",
+    desc: "Custom software and digital products for growing businesses.",
+    href: "/software-solutions",
     status: "soon",
     statusText: "Coming soon",
     go: "In the works",
   },
   {
-    title: "Fitness",
-    desc: "Strength, wellness and performance — coming next.",
-    href: "/fitness",
-    status: "future",
-    statusText: "Future",
+    title: "Billion Dreams Gym Equipments",
+    desc: "Strength and performance equipment for gyms, studios and home setups.",
+    href: "/gym-equipments",
+    status: "soon",
+    statusText: "Coming soon",
     go: "In the works",
   },
 ];
@@ -41,19 +50,19 @@ const ventures = [
   <section class="home-hero">
     <div class="container">
       <p class="kicker fade-up"><span></span>Billion Dreams Group<span></span></p>
-      <h1 class="fade-up d1">One group.<br /><span class="gold">Many dreams.</span></h1>
+      <h1 class="fade-up d1">One group.<br /><span class="accent">Many dreams.</span></h1>
       <p class="lede fade-up d2">
-        A multi-sector group spanning interiors &amp; landscapes, perfumes,
-        venture capital and fitness — united by craft, ambition and an eye for detail.
+        A multi-sector group spanning interiors, electric mobility, logistics,
+        software and gym equipments — united by craft, ambition and an eye for detail.
       </p>
       <div class="cta-row fade-up d3">
-        <a href="/interiors" class="btn btn-gold">Explore Interiors →</a>
+        <a href="/interiors" class="btn btn-accent">Explore Interiors →</a>
         <a href="#ventures" class="btn btn-ghost">Our ventures</a>
       </div>
       <ul class="hero-meta fade-up d3">
-        <li>Four ventures</li>
+        <li>Five ventures</li>
         <li>UAE &amp; India</li>
-        <li>Design · Lifestyle · Investment</li>
+        <li>Design · Mobility · Technology</li>
       </ul>
     </div>
     <a href="#ventures" class="scroll-cue" aria-label="Scroll to ventures">
@@ -65,27 +74,24 @@ const ventures = [
     <div class="container">
       <div class="center">
         <p class="eyebrow">Our ventures</p>
-        <h2 class="section-title">Four pursuits, one standard of excellence</h2>
+        <h2 class="section-title">Five pursuits, one standard of excellence</h2>
       </div>
 
       <div class="ventures" style="margin-top: 2.6rem;">
         {
           ventures.map((v) => {
             const isLink = v.status === "active";
-            return isLink ? (
-              <a class="venture is-link" href={v.href}>
+            const Tag = isLink ? "a" : "div";
+            return (
+              <Tag class:list={["venture", isLink && "is-link"]} href={isLink ? v.href : undefined}>
                 <span class:list={["status", v.status]}>{v.statusText}</span>
                 <h3>{v.title}</h3>
+                {v.note && <p class="venture-note">{v.note}</p>}
                 <p>{v.desc}</p>
-                <span class="go">{v.go} →</span>
-              </a>
-            ) : (
-              <div class="venture">
-                <span class:list={["status", v.status]}>{v.statusText}</span>
-                <h3>{v.title}</h3>
-                <p>{v.desc}</p>
-                <span class="go" style="color: var(--dim);">{v.go}</span>
-              </div>
+                <span class="go" style={isLink ? undefined : "color: var(--dim);"}>
+                  {isLink ? `${v.go} →` : v.go}
+                </span>
+              </Tag>
             );
           })
         }

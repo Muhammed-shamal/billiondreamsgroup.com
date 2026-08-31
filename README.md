@@ -5,39 +5,68 @@ Official site for **Billion Dreams Group** and its ventures, built with
 
 | Venture | Status | Page |
 | --- | --- | --- |
-| Interiors & Landscapes | **Active** | `/interiors` (full page) |
-| Perfumes | Coming soon | `/perfumes` (stub) |
-| Venture Capital | Coming soon | `/ventures` (stub) |
-| Fitness | Future | `/fitness` (stub) |
+| Billion Dreams Interiors | **Active** | `/interiors` (full page) |
+| Indish eVolt — EV charging | **Rolling out** | `/indish-evolt` (full page) |
+| Billion Dreams Logistics | Coming soon | `/logistics` (stub) |
+| Billion Dreams Software Solutions | Coming soon | `/software-solutions` (stub) |
+| Billion Dreams Gym Equipments | Coming soon | `/gym-equipments` (stub) |
+
+Interiors trades under two companies: **Billion Dreams Interiors** in India and
+**Majdan Interior Design Consultancy FZ LLC** in the UAE. Both are shown, with
+their own logos, in the "Where we operate" block on `/interiors`.
+
+**Indish eVolt** is a green-energy company established under **Indish World**
+(est. 1997), presented here as a partner venture — the page says so explicitly
+and links out to `indishevolt.com`. No investor or return figures appear on the
+public site; that material stays in the deck.
 
 ---
 
 ## Tech stack
 
 - **Astro v7** — zero-JS static output, component-based.
-- **`astro:assets`** — automatic image optimization (JPEG → responsive WebP).
-- Plain CSS design system in `src/styles/global.css` (theme: black · gold · white).
+- **`astro:assets`** — automatic image optimization (JPEG/PNG → responsive WebP).
+- Plain CSS design system in `src/styles/global.css`.
 - No framework runtime; deploys as static files.
+
+## Theming
+
+Nothing in the stylesheet hard-codes a brand colour. Components read
+`--accent-1/2/3`, `--accent-rgb`, `--accent-line` and `--accent-gradient`, which
+default to Billion Dreams gold on `:root`. A venture page re-skins itself by
+passing a theme class to the layout:
+
+```astro
+<Layout title="…" theme="theme-evolt"> … </Layout>
+```
+
+`.theme-evolt` (Indish eVolt green) lives in the "Venture themes" block near the
+top of `global.css`. To add another venture theme, copy that block and change
+the values — **redeclare all five tokens**, not just `--accent-rgb`: a custom
+property that references another resolves against the element it is declared on,
+so descendants inherit the already-computed value.
 
 ## Project structure
 
 ```
 billiondreamsgroup.com/
 ├── astro.config.mjs
-├── package.json
+├── netlify.toml               # build config + 301s for retired URLs
 ├── public/
 │   └── logo.jpeg              # favicon / og image (served as-is)
 ├── src/
 │   ├── assets/
-│   │   ├── logo.jpeg          # logo used by <Image> (optimized)
+│   │   ├── logo.jpeg          # group logo used in header/footer
+│   │   ├── brands/            # transparent PNG lockups (BD, Majdan, Indish eVolt)
+│   │   ├── evolt/             # Indish eVolt hero + station visuals
 │   │   └── interiors/
 │   │       ├── hero.jpg       # interiors page hero background
 │   │       ├── workshop/      # "Inside our workshop" strip (auto-collected)
 │   │       └── gallery/       # "Our work" grid (auto-collected)
-│   ├── components/            # Header, Footer, VentureCard-style cards, ComingSoon
-│   ├── layouts/Layout.astro   # shared <head>, fonts, header + footer
+│   ├── components/            # Header, Footer, ComingSoon
+│   ├── layouts/Layout.astro   # shared <head>, fonts, header + footer, theme class
 │   ├── styles/global.css      # design system
-│   └── pages/                 # index, interiors, perfumes, ventures, fitness
+│   └── pages/                 # index, interiors, indish-evolt, + 3 stubs
 └── assets/                    # ORIGINAL source photos/videos (not published)
 ```
 
@@ -59,16 +88,28 @@ npm run preview    # serve the built dist/ locally
 - **Compress big source photos:** phone photos are often 12 MP / multiple MB.
   After adding large images, run `npm run compress` — it downscales anything
   over 1920px and re-encodes it in place (originals stay safe in `assets/`).
-  Astro then generates the small responsive WebP variants at build time. The
-  script skips images that are already small, so it's safe to re-run.
-- **Interiors copy, machinery, contacts:** edit `src/pages/interiors.astro`.
+  The script skips images that are already small, so it's safe to re-run.
+- **Interiors copy, operating companies, machinery, contacts:** edit
+  `src/pages/interiors.astro`.
+- **Indish eVolt copy:** edit the arrays at the top of
+  `src/pages/indish-evolt.astro` (focus areas, network, capabilities, segments,
+  progress) — the markup loops over them.
 - **Ventures on the homepage:** edit the `ventures` array in `src/pages/index.astro`.
-- **Coming-soon pages:** edit `src/pages/perfumes.astro`, `ventures.astro`, `fitness.astro`.
+- **Coming-soon pages:** edit `src/pages/logistics.astro`,
+  `software-solutions.astro`, `gym-equipments.astro`.
+- **Navigation:** edit the `links` array in `src/components/Header.astro`.
 
 ## Image notes
 
-- The `assets/` folder holds the **original** WhatsApp photos/videos as an archive.
-  Only a curated subset was copied into `src/assets/interiors/` for the site.
+- The `assets/` folder holds the **original** photos/videos as an archive. Only a
+  curated subset was copied into `src/assets/` for the site.
+- `assets/documents/` (brand PDFs and the Indish eVolt investor deck) is
+  **gitignored on purpose** — this repository is public and the deck contains
+  confidential financials. The logos and imagery the site needs were already
+  extracted into `src/assets/brands/` and `src/assets/evolt/`.
+- The Indish eVolt station images are **design visualisations, not photographs
+  of installed sites**, and the page labels them as such. Replace them with real
+  site photos once Phase 1 stations are live.
 - Only the **cold-press** machine was photographed; the Edgebander and Panel Saw
   are presented as descriptive cards (no photo).
 - ~12 sofa images (studio backgrounds, a "MANLY" watermark, "photo prohibited"
@@ -77,10 +118,17 @@ npm run preview    # serve the built dist/ locally
 - 13 kitchen photos were shot sideways (90° rotated) and were skipped pending
   rotation fixes.
 
+## Retired URLs
+
+`/perfumes`, `/ventures` and `/fitness` were removed when the venture list
+changed. `netlify.toml` 301s the first two to `/` and `/fitness` to
+`/gym-equipments`, so existing links and search results don't break.
+
 ## Deploy
 
 `npm run build` outputs a static `dist/`. Host anywhere:
 
-- **Netlify / Vercel** — connect the repo (build: `npm run build`, publish: `dist`).
-- **GitHub Pages** — publish the `dist/` folder.
-- **cPanel / shared hosting** — upload the contents of `dist/` to `public_html`.
+- **Netlify** — connected; `netlify.toml` sets build, publish dir, Node 22 and
+  the redirects.
+- **Vercel / GitHub Pages / cPanel** — build and publish `dist/` (redirects would
+  need re-declaring in that host's own format).

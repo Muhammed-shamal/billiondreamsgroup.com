@@ -1,3 +1,9 @@
+# Confidential source material — brand PDFs and the Indish eVolt investor
+# deck (per-machine returns, capital requirements, phase-wise projections).
+# This repository is public: keep these out of it. Everything the site needs
+# has already been extracted into src/assets/.
+assets/documents/
+
 # build output
 dist/
 # generated types

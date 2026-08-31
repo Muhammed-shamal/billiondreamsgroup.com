@@ -8,3 +8,24 @@
 [build.environment]
   # Astro 7 requires Node >= 22.12.0.
   NODE_VERSION = "22"
+
+# Retired ventures. Redirects run only when no static file matches, so these
+# fire for the old URLs without shadowing anything the build emits.
+[[redirects]]
+  from = "/perfumes"
+  to = "/"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/ventures"
+  to = "/"
+  status = 301
+  force = false
+
+# Fitness was renamed to Gym Equipments.
+[[redirects]]
+  from = "/fitness"
+  to = "/gym-equipments"
+  status = 301
+  force = false
