@@ -11,9 +11,27 @@ Official site for **Billion Dreams Group** and its ventures, built with
 | Billion Dreams Software Solutions | Coming soon | `/software-solutions` (stub) |
 | Billion Dreams Gym Equipments | Coming soon | `/gym-equipments` (stub) |
 
-Interiors trades under two countries: **Billion Dreams Interiors** in India and
-**Majdan Interior Design Consultancy FZ LLC** in the UAE. Both are shown, with
-their own logos, in the "Where we operate" block on `/interiors`.
+Interiors trades under three companies across two countries: **Billion Dreams
+Interiors** in India, and **Majdan Interior Design Consultancy FZ LLC** and
+**Milestone Kitchens** (kitchens & Corian tops) in the UAE. All three are shown,
+with their own logos, in the "Where we operate" block on `/interiors`.
+
+### Logos
+
+Two different marks, easy to mix up:
+
+- `brands/billion-dreams.png` — the **group** mark. Used in the site header and
+  footer. Transparent, so it sits cleanly on the blurred sticky header.
+- `brands/billion-dreams-interiors.png` — the **Interiors venture** mark (BD
+  monogram with a sofa inside the D). Used only on the Indian operations card.
+
+Every lockup in `brands/` is a trimmed, transparent PNG rendered for the black
+plates in the operations block. The `.jpeg` files alongside them are the
+untouched originals the PNGs were derived from — keep them, nothing imports them.
+Milestone supplied a single-colour navy mark on white, so `milestone.png` is a
+white knockout of it; swap it out if an official reversed lockup turns up.
+`src/assets/logo.jpeg` is likewise the original behind `billion-dreams.png`.
+`public/logo.jpeg` is separate and still serves the favicon and OG image.
 
 **Indish eVolt** is a green-energy company established under **Indish World**
 (est. 1997), presented here as a partner venture — the page says so explicitly
@@ -57,7 +75,7 @@ billiondreamsgroup.com/
 ├── src/
 │   ├── assets/
 │   │   ├── logo.jpeg          # group logo used in header/footer
-│   │   ├── brands/            # transparent PNG lockups (BD, Majdan, Indish eVolt)
+│   │   ├── brands/            # transparent PNG lockups (BD, Majdan, Milestone, Indish eVolt)
 │   │   ├── evolt/             # Indish eVolt hero + station visuals
 │   │   └── interiors/
 │   │       ├── hero.jpg       # interiors page hero background

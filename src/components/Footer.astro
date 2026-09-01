@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/logo.jpeg";
+import logo from "../assets/brands/billion-dreams.png";
 
 const year = new Date().getFullYear();
 ---
@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <Image src={logo} alt="Billion Dreams" width={200} height={134} />
+        <Image src={logo} alt="Billion Dreams" width={200} />
         <p>
           One group, many dreams — spanning interiors, electric mobility,
           logistics, software and gym equipments.

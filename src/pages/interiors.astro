@@ -3,8 +3,9 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import heroImg from "../assets/interiors/hero.jpg";
-import bdLogo from "../assets/brands/billion-dreamsInteriors.jpeg";
+import bdiLogo from "../assets/brands/billion-dreams-interiors.png";
 import majdanLogo from "../assets/brands/majdan.png";
+import milestoneLogo from "../assets/brands/milestone.png";
 
 // Auto-collect gallery + workshop images (drop files in the folders to add more)
 const galleryModules = import.meta.glob<{ default: ImageMetadata }>(
@@ -81,13 +82,14 @@ const machines = [
       <h2 class="section-title">Two countries, one standard</h2>
       <p class="section-lead">
         The same team, the same workshop discipline and the same finish — delivered
-        in India as Billion Dreams Interiors, and in the UAE as Majdan.
+        in India as Billion Dreams Interiors, and in the UAE as Majdan and
+        Milestone Kitchens.
       </p>
 
       <div class="ops">
         <div class="ops-card">
-          <div class="ops-logo ops-logo--wide">
-            <Image src={bdLogo} alt="Billion Dreams" widths={[260, 520]} sizes="260px" />
+          <div class="ops-logo ops-logo--square">
+            <Image src={bdiLogo} alt="Billion Dreams Interiors" widths={[170, 340]} sizes="170px" />
           </div>
           <span class="ops-region">Indian operations</span>
           <h3>Billion Dreams Interiors</h3>
@@ -116,6 +118,23 @@ const machines = [
             <a href="tel:+971563600927">+971 56 360 0927</a>
           </div>
           <p class="ops-meta">Licence SFF00723 · RAKEZ, UAE</p>
+        </div>
+
+        <div class="ops-card">
+          <div class="ops-logo ops-logo--small">
+            <Image src={milestoneLogo} alt="Milestone Kitchens" widths={[130, 261]} sizes="130px" />
+          </div>
+          <span class="ops-region">UAE operations</span>
+          <h3>Milestone Kitchens</h3>
+          <p class="ops-role">Kitchens &amp; Corian top works</p>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Industrial Area 13, Sharjah</span>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:+971563600927">+971 56 360 0927</a>
+          </div>
         </div>
       </div>
     </div>

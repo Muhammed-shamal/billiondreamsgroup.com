@@ -571,7 +571,7 @@ a { color: inherit; text-decoration: none; }
 }
 /* Pure-black plate: both lockups are drawn for dark backgrounds. */
 .ops-logo {
-  height: 170px;
+  height: 186px;
   display: grid;
   place-items: center;
   padding: 1.2rem;
@@ -582,8 +582,10 @@ a { color: inherit; text-decoration: none; }
 }
 /* Sized per lockup so the two brands carry equal optical weight. */
 .ops-logo img { width: auto; object-fit: contain; }
-.ops-logo--wide img { max-height: 84px; }
-.ops-logo--tall img { max-height: 132px; }
+.ops-logo--square img { max-height: 132px; }
+.ops-logo--tall img { max-height: 140px; }
+/* Milestone's mark is supplied at 261px wide — held small so it stays crisp. */
+.ops-logo--small img { max-height: 84px; }
 .ops-region {
   display: inline-block;
   font-size: 0.68rem;
@@ -593,6 +595,12 @@ a { color: inherit; text-decoration: none; }
   color: var(--accent-2);
 }
 .ops-card h3 { font-size: 1.1rem; font-weight: 700; line-height: 1.32; margin: 0.45rem 0 1.1rem; }
+.ops-role {
+  margin: -0.75rem 0 1.05rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-2);
+}
 .ops-card .row {
   display: flex;
   gap: 0.7rem;
