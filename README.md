@@ -11,7 +11,7 @@ Official site for **Billion Dreams Group** and its ventures, built with
 | Billion Dreams Software Solutions | Coming soon | `/software-solutions` (stub) |
 | Billion Dreams Gym Equipments | Coming soon | `/gym-equipments` (stub) |
 
-Interiors trades under two companies: **Billion Dreams Interiors** in India and
+Interiors trades under two countries: **Billion Dreams Interiors** in India and
 **Majdan Interior Design Consultancy FZ LLC** in the UAE. Both are shown, with
 their own logos, in the "Where we operate" block on `/interiors`.
 
