@@ -1,15 +1,308 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+import heroImg from "../assets/logistics/hero.jpg";
+import uaeImg from "../assets/logistics/corridor-uae.jpg";
+import indiaImg from "../assets/logistics/corridor-india.jpg";
+
+// Auto-collected — drop real shipment photos into the folder and they appear.
+const galleryModules = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/logistics/gallery/*.{jpg,jpeg,png}",
+  { eager: true },
+);
+const gallery = Object.entries(galleryModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, m]) => m.default);
+
+const routes = ["China → UAE", "China → India", "Ocean freight", "Air freight", "Door to door"];
+
+const services = [
+  {
+    name: "China sourcing",
+    body: "Finding and shortlisting the right suppliers for what you actually need — not just the first factory that answers.",
+    icon: "search",
+  },
+  {
+    name: "Factory verification",
+    body: "We check the factory is real, operating and capable of the order before any money moves.",
+    icon: "factory",
+  },
+  {
+    name: "License verification",
+    body: "Trading licences and export paperwork confirmed up front, so a shipment doesn't stall on a document.",
+    icon: "badge",
+  },
+  {
+    name: "Product check",
+    body: "Goods inspected against your specification before they leave China — quantity, finish and condition.",
+    icon: "check",
+  },
+  {
+    name: "Ocean & air freight",
+    body: "Booked on whichever mode the cargo and the deadline call for, with the cost difference explained.",
+    icon: "ship",
+  },
+  {
+    name: "Customs clearance",
+    body: "Import clearance handled at the destination in both the UAE and India.",
+    icon: "stamp",
+  },
+  {
+    name: "Door-to-door delivery",
+    body: "One line of accountability from the supplier's floor to your warehouse, shop or site.",
+    icon: "truck",
+  },
+];
+
+const steps = [
+  { n: "01", name: "Source", body: "You tell us the product; we come back with suppliers, samples and landed pricing." },
+  { n: "02", name: "Verify", body: "Factory and licence checks before any deposit is paid." },
+  { n: "03", name: "Inspect", body: "Product checked against spec before it is released for dispatch." },
+  { n: "04", name: "Ship", body: "Ocean or air, booked and tracked to the destination port." },
+  { n: "05", name: "Clear", body: "Customs clearance and duties handled on arrival." },
+  { n: "06", name: "Deliver", body: "Final-mile delivery to your door, signed off." },
+];
+
+const corridors = [
+  {
+    n: "Route 01",
+    title: "China → United Arab Emirates",
+    body: "Full-container and consolidated shipments from Chinese suppliers into the UAE — verified at the factory, cleared on arrival and delivered to your door.",
+    img: uaeImg,
+    alt: "Container terminal cranes lit at dusk",
+  },
+  {
+    n: "Route 02",
+    title: "China → India",
+    body: "The same route run into India, with the same checks before dispatch and customs clearance handled at the destination.",
+    img: indiaImg,
+    alt: "A container ship under way at sea",
+  },
+];
 ---
 
 <Layout
-  title="Billion Dreams Logistics — Coming Soon"
-  description="Billion Dreams Logistics — a forthcoming venture of Billion Dreams Group. Details coming soon."
+  title="Billion Dreams Logistics — Import from China to the UAE & India"
+  description="Billion Dreams Logistics handles imports from China into the UAE and India — China sourcing, factory and licence verification, product checks, ocean and air freight, customs clearance and door-to-door delivery."
   active="logistics"
 >
-  <ComingSoon
-    title="Logistics"
-    tagline="Moving goods with the same precision we bring to everything else. This venture is being set up — full details coming soon."
-  />
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="hero-bg">
+      <Image
+        src={heroImg}
+        alt="Container terminal cranes lit against a night sky"
+        widths={[768, 1200, 1440, 1920]}
+        sizes="100vw"
+        quality={74}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="container">
+      <p class="eyebrow fade-up">A Billion Dreams venture</p>
+      <h1 class="fade-up d1">Billion Dreams Logistics</h1>
+      <p class="lede fade-up d2">
+        Import from China to the UAE and India — sourcing, verification, freight
+        and customs clearance, handled end to end by one team.
+      </p>
+      <div class="cta-row fade-up d3" style="margin-top: 1.6rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+        <a href="#contact" class="btn btn-accent">Start an enquiry</a>
+        <a href="#services" class="btn btn-ghost">What we handle</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">What we do</p>
+      <h2 class="section-title">One partner for the whole China route</h2>
+      <p class="section-lead">
+        Importing is rarely one problem — it's a supplier you can't visit, a
+        licence you can't read, a container you can't see and a customs desk that
+        stops everything. Billion Dreams Logistics takes the whole chain, so
+        there is a single number to call when something needs an answer.
+      </p>
+
+      <div class="chips">
+        {
+          routes.map((r) => (
+            <span class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              {r}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services" style="background:#050505; border-block:1px solid var(--line);">
+    <div class="container">
+      <p class="eyebrow">Services</p>
+      <h2 class="section-title">Everything between the factory and your door</h2>
+
+      <div class="features">
+        {
+          services.map((s) => (
+            <div class="feature">
+              <div class="ic">
+                {s.icon === "search" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                )}
+                {s.icon === "factory" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M4 21V10l6 4V10l6 4V7l4-2v16"/><path d="M7 17h2M13 17h2"/></svg>
+                )}
+                {s.icon === "badge" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
+                )}
+                {s.icon === "check" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 3h6v3H9z"/><path d="m9 13 2 2 4-4"/></svg>
+                )}
+                {s.icon === "ship" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17a3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 3 2 3 3 0 0 0 3-2 3 3 0 0 0 3 2 3 3 0 0 0 3-2"/><path d="M4 14 5.5 9h13L20 14"/><path d="M12 9V5"/><path d="M9 5h6"/></svg>
+                )}
+                {s.icon === "stamp" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3c0 2 1.5 2.5 1.5 5h3C13.5 8.5 15 8 15 6a3 3 0 0 0-3-3z"/><path d="M5 16h14v3H5z"/><path d="M4 21h16"/></svg>
+                )}
+                {s.icon === "truck" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v10H3z"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                )}
+              </div>
+              <h3>{s.name}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUTES -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Where we ship</p>
+      <h2 class="section-title">Two corridors, run the same way</h2>
+
+      <div class="splits">
+        {
+          corridors.map((c) => (
+            <div class="split">
+              <div class="split-media">
+                <Image src={c.img} alt={c.alt} widths={[500, 900]} sizes="(max-width: 820px) 100vw, 530px" quality={74} />
+              </div>
+              <div class="split-body">
+                <span class="num">{c.n}</span>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" style="background:#050505; border-block:1px solid var(--line);">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2 class="section-title">Six steps, one point of contact</h2>
+
+      <div class="features features--tri">
+        {
+          steps.map((s) => (
+            <div class="feature">
+              <div class="ic">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </div>
+              <h3><span style="color:var(--accent-2); font-weight:800; margin-right:.4rem;">{s.n}</span>{s.name}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY (hidden until real photos are added) -->
+  {
+    gallery.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <p class="eyebrow">On the ground</p>
+          <h2 class="section-title">Recent shipments</h2>
+          <div class="gallery">
+            {gallery.map((img) => (
+              <figure>
+                <Image
+                  src={img}
+                  alt="Billion Dreams Logistics shipment"
+                  widths={[300, 600, 900]}
+                  sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 30vw"
+                  quality={72}
+                />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="section-title">Tell us what you're importing</h2>
+      <p class="section-lead">
+        Send the product, the quantity and where it needs to land. We'll come
+        back with suppliers, a landed cost and a realistic timeline.
+      </p>
+
+      <div class="contact-grid">
+        <div class="location">
+          <div class="loc-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9 15 15 0 0 1-4-9 15 15 0 0 1 4-9z"/></svg>
+          </div>
+          <h3>United Arab Emirates</h3>
+          <p class="region">UAE imports</p>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:+971563600927">+971 56 360 0927</a>
+          </div>
+        </div>
+
+        <div class="location">
+          <div class="loc-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9 15 15 0 0 1-4-9 15 15 0 0 1 4-9z"/></svg>
+          </div>
+          <h3>India</h3>
+          <p class="region">India imports</p>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:+919995555043">+91 99955 55043</a>
+          </div>
+        </div>
+
+        <div class="location">
+          <div class="loc-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2.5 9h19M2.5 15h19"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>
+          </div>
+          <h3>Online</h3>
+          <p class="region">Billion Dreams Group</p>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2.5 9h19M2.5 15h19"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>
+            <a href="/">www.billiondreamsgroup.com</a>
+          </div>
+          <div style="margin-top:1.2rem;">
+            <a href="tel:+971563600927" class="btn btn-accent">Call the UAE team</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

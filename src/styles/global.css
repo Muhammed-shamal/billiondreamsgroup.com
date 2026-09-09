@@ -430,9 +430,9 @@ a { color: inherit; text-decoration: none; }
 .feature h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 0.4rem; }
 .feature p { font-size: 0.9rem; color: var(--dim); font-weight: 300; }
 
-/* ---------- Machinery ---------- */
-.machines { display: grid; gap: 1.4rem; margin-top: 2.5rem; }
-.machine {
+/* ---------- Split media/text rows ---------- */
+.splits { display: grid; gap: 1.4rem; margin-top: 2.5rem; }
+.split {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(1.2rem, 4vw, 3rem);
@@ -442,13 +442,13 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--radius);
   overflow: hidden;
 }
-.machine:nth-child(even) .machine-media { order: 2; }
-.machine-media { aspect-ratio: 4 / 3; overflow: hidden; }
-.machine-media img { width: 100%; height: 100%; object-fit: cover; }
-.machine-body { padding: clamp(1.4rem, 3vw, 2.2rem); }
-.machine-body .num { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; color: var(--accent-2); }
-.machine-body h3 { font-size: clamp(1.15rem, 2.5vw, 1.5rem); font-weight: 700; margin: 0.5rem 0 0.6rem; }
-.machine-body p { color: var(--muted); font-weight: 300; }
+.split:nth-child(even) .split-media { order: 2; }
+.split-media { aspect-ratio: 4 / 3; overflow: hidden; }
+.split-media img { width: 100%; height: 100%; object-fit: cover; }
+.split-body { padding: clamp(1.4rem, 3vw, 2.2rem); }
+.split-body .num { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; color: var(--accent-2); }
+.split-body h3 { font-size: clamp(1.15rem, 2.5vw, 1.5rem); font-weight: 700; margin: 0.5rem 0 0.6rem; }
+.split-body p { color: var(--muted); font-weight: 300; }
 
 /* ---------- Gallery ---------- */
 .gallery {
@@ -696,6 +696,17 @@ a { color: inherit; text-decoration: none; }
 /* Narrow screens crop the brand hero tight around the subject, so the side
    scrim no longer clears the text — wash the lower half instead. */
 @media (max-width: 820px) {
+  /* Narrow viewports crop hero photos tight around their subject, pushing the
+     bright part of the image straight under the copy. Deepen the wash. */
+  .page-hero::after {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0.86) 68%,
+      rgba(7, 7, 7, 0.96) 100%
+    );
+  }
   .page-hero--brand { min-height: min(72vh, 620px); }
   .page-hero--brand::before {
     background: linear-gradient(
@@ -709,9 +720,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 820px) {
-  .machine { grid-template-columns: 1fr; }
-  .machine:nth-child(even) .machine-media { order: 0; }
-  .machine-media { aspect-ratio: 16 / 10; }
+  .split { grid-template-columns: 1fr; }
+  .split:nth-child(even) .split-media { order: 0; }
+  .split-media { aspect-ratio: 16 / 10; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
 }

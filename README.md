@@ -7,7 +7,7 @@ Official site for **Billion Dreams Group** and its ventures, built with
 | --- | --- | --- |
 | Billion Dreams Interiors | **Active** | `/interiors` (full page) |
 | Indish eVolt — EV charging | **Rolling out** | `/indish-evolt` (full page) |
-| Billion Dreams Logistics | Coming soon | `/logistics` (stub) |
+| Billion Dreams Logistics | **Active** | `/logistics` (full page) |
 | Billion Dreams Software Solutions | Coming soon | `/software-solutions` (stub) |
 | Billion Dreams Gym Equipments | Coming soon | `/gym-equipments` (stub) |
 
@@ -77,6 +77,8 @@ billiondreamsgroup.com/
 │   │   ├── logo.jpeg          # group logo used in header/footer
 │   │   ├── brands/            # transparent PNG lockups (BD, Majdan, Milestone, Indish eVolt)
 │   │   ├── evolt/             # Indish eVolt hero + station visuals
+│   │   ├── logistics/         # hero + corridor photos
+│   │   │   └── gallery/       # drop real shipment photos here (auto-collected)
 │   │   └── interiors/
 │   │       ├── hero.jpg       # interiors page hero background
 │   │       ├── workshop/      # "Inside our workshop" strip (auto-collected)
@@ -113,11 +115,25 @@ npm run preview    # serve the built dist/ locally
   `src/pages/indish-evolt.astro` (focus areas, network, capabilities, segments,
   progress) — the markup loops over them.
 - **Ventures on the homepage:** edit the `ventures` array in `src/pages/index.astro`.
-- **Coming-soon pages:** edit `src/pages/logistics.astro`,
-  `software-solutions.astro`, `gym-equipments.astro`.
+- **Logistics copy:** edit the arrays at the top of `src/pages/logistics.astro`
+  (`routes`, `services`, `steps`, `corridors`) — the markup loops over them.
+  Service icons are keyed by the `icon` string; add a new `{s.icon === "x" && ...}`
+  branch to introduce one.
+- **Logistics photos:** drop `.jpg`/`.png` files into
+  `src/assets/logistics/gallery/` and an "On the ground" grid appears. While
+  the folder is empty the section hides itself.
+- **Coming-soon pages:** edit `src/pages/software-solutions.astro` and
+  `gym-equipments.astro`.
 - **Navigation:** edit the `links` array in `src/components/Header.astro`.
 
 ## Image notes
+
+- **The logistics photos are placeholders.** `hero.jpg` and `corridor-uae.jpg`
+  are CC0, `corridor-india.jpg` is CC0 — all from Wikimedia Commons, chosen
+  because CC0 needs no attribution and carries no commercial restriction. They
+  are generic container-port photography, not Billion Dreams shipments. Replace
+  them with real photos when there are some; until then do not claim otherwise
+  in the copy.
 
 - The `assets/` folder holds the **original** photos/videos as an archive. Only a
   curated subset was copied into `src/assets/` for the site.
