@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --p1:#a742f5;         /* Wiesella purple, light  */
+    --p2:#7010e0;         /* Wiesella purple, mid    */
+    --p3:#3a00a8;         /* Wiesella purple, deep   */
+    --grad:linear-gradient(135deg,var(--p1),var(--p2) 52%,var(--p3));
+    --bg:#080412;
+    --panel:#130a28;
+    --line:rgba(255,255,255,.10);
+    --white:#fff;
+    --muted:#b7aecd;
+    --dim:#7c7193;
+    --gold:#d4af37;
+    --green:#78be46;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#222;font-family:"Montserrat",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+
+  .board{
+    position:relative;width:1080px;height:1350px;overflow:hidden;
+    background:var(--bg);color:var(--white);
+    padding:86px 80px;display:flex;flex-direction:column;
+    margin:0 auto 40px;
+  }
+  /* ambient brand glow */
+  .board::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(62% 40% at 78% -6%, rgba(167,66,245,.34), transparent 68%),
+      radial-gradient(52% 34% at 6% 104%, rgba(58,0,168,.46), transparent 70%);
+  }
+  .board > *{position:relative;z-index:1}
+
+  .eyebrow{
+    font-size:20px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--p1);margin-bottom:26px;
+  }
+  .eyebrow.dim{color:var(--dim)}
+  h1{font-size:92px;line-height:1.02;font-weight:800;letter-spacing:-.028em}
+  h2{font-size:68px;line-height:1.08;font-weight:800;letter-spacing:-.022em}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:27px;line-height:1.5;font-weight:300;color:var(--muted);margin-top:26px;max-width:800px}
+  .rule{height:4px;width:96px;border-radius:99px;background:var(--grad);margin:30px 0 0}
+
+  /* brand bar */
+  .brandbar{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brandbar img{width:188px;height:auto;display:block}
+  .brandbar.sm img{width:150px}
+  .url{font-size:21px;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+
+  .spacer{flex:1}
+
+  /* browser chrome */
+  .browser{border-radius:18px;overflow:hidden;background:#161021;border:1px solid var(--line);
+    box-shadow:0 44px 90px rgba(0,0,0,.66), 0 0 0 1px rgba(167,66,245,.18);}
+  .browser .bar{height:46px;display:flex;align-items:center;gap:9px;padding:0 18px;background:#1d1430;border-bottom:1px solid var(--line)}
+  .dot{width:12px;height:12px;border-radius:50%}
+  .pill{margin-left:14px;flex:1;height:26px;border-radius:99px;background:#120c20;
+    display:flex;align-items:center;padding:0 16px;font-size:15px;color:var(--dim);font-weight:500;letter-spacing:.02em}
+  .browser img{display:block;width:100%}
+
+  /* thumbs row */
+  .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .thumb{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#120c20;
+    box-shadow:0 22px 48px rgba(0,0,0,.6)}
+  .thumb img{display:block;width:100%;height:auto}
+  .thumb span{display:block;padding:15px 16px 17px;font-size:19px;font-weight:700;letter-spacing:.01em}
+  .thumb span i{display:block;font-style:normal;font-size:15px;font-weight:500;color:var(--dim);margin-top:4px}
+
+  /* stat list */
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
+  .stats.three{grid-template-columns:repeat(3,1fr);gap:16px}
+  .stats.three .stat{padding:26px 22px 28px}
+  .stats.three b{font-size:44px}
+  .stats.three span{font-size:17px;margin-top:6px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:30px 30px 32px}
+  .stat b{display:block;font-size:50px;font-weight:800;letter-spacing:-.02em;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{display:block;font-size:20px;font-weight:500;color:var(--muted);margin-top:8px;line-height:1.35}
+
+  /* theming comparison */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .cmp{border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 26px 56px rgba(0,0,0,.62)}
+  .cmp img{display:block;width:100%;height:auto}
+  .cmp .tag{display:flex;align-items:center;gap:11px;padding:18px 20px;background:var(--panel);font-size:20px;font-weight:700}
+  .swatch{width:17px;height:17px;border-radius:50%;flex:none}
+
+  .code{
+    margin-top:26px;background:#0d0719;border:1px solid var(--line);border-left:4px solid var(--p2);
+    border-radius:12px;padding:22px 26px;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-size:21px;color:#cfc4e8;letter-spacing:.01em
+  }
+  .code em{font-style:normal;color:var(--p1)}
+
+  /* checklist */
+  .checks{display:flex;flex-direction:column;gap:20px;margin-top:10px}
+  .check{display:flex;align-items:flex-start;gap:18px;font-size:27px;font-weight:600;line-height:1.3}
+  .check .tick{width:38px;height:38px;border-radius:50%;background:var(--grad);flex:none;
+    display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .check .tick svg{width:20px;height:20px;stroke:#fff;stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .check i{display:block;font-style:normal;font-size:19px;font-weight:400;color:var(--dim);margin-top:5px}
+
+  /* final CTA */
+  .cta-logo{width:430px;height:auto;display:block;margin:0 auto}
+  .center{text-align:center}
+  .btn{display:inline-flex;align-items:center;gap:12px;background:var(--grad);color:#fff;
+    font-size:26px;font-weight:800;letter-spacing:.02em;padding:24px 46px;border-radius:99px;
+    box-shadow:0 20px 48px rgba(112,16,224,.44)}
+  .services{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .chip{border:1px solid rgba(167,66,245,.45);background:rgba(167,66,245,.10);
+    border-radius:99px;padding:14px 26px;font-size:20px;font-weight:600;color:#e5dcf7}
+</style>
+</head>
+<body>
+
+<!-- ============ 1 · COVER ============ -->
+<div class="board" id="b1">
+  <div class="brandbar">
+    <img src="wiesella.png" alt="Wiesella" />
+    <span class="url">WIESELLA.COM</span>
+  </div>
+
+  <div style="margin-top:72px">
+    <p class="eyebrow">Case study · Web design &amp; development</p>
+    <h1>Billion Dreams<br />Group</h1>
+    <div class="rule"></div>
+    <p class="lede">A multi-sector group in the UAE &amp; India — four ventures,
+      one website. Designed and built by Wiesella.</p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="browser">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="pill">billiondreamsgroup.com</span>
+    </div>
+    <img src="shots/home-crop.jpg" alt="Billion Dreams Group homepage" />
+  </div>
+</div>
+
+<!-- ============ 2 · THE BUILD ============ -->
+<div class="board" id="b2">
+  <p class="eyebrow">The build</p>
+  <h2>One group.<br /><span class="grad">Four ventures.</span> One site.</h2>
+  <p class="lede">Each venture gets its own page, its own story and its own
+    identity — without ever leaving the group's brand behind.</p>
+
+  <div style="height:46px"></div>
+
+  <div class="thumbs">
+    <div class="thumb">
+      <img src="shots/interiors-thumb.jpg" alt="Interiors page" />
+      <span>Interiors<i>Fit-out · India &amp; UAE</i></span>
+    </div>
+    <div class="thumb">
+      <img src="shots/evolt-thumb.jpg" alt="Indish eVolt page" />
+      <span>Indish eVolt<i>EV charging network</i></span>
+    </div>
+    <div class="thumb">
+      <img src="shots/logistics-thumb.jpg" alt="Logistics page" />
+      <span>Logistics<i>China → UAE &amp; India</i></span>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="stats three">
+    <div class="stat"><b>0 KB</b><span>JavaScript shipped<br />to the browser</span></div>
+    <div class="stat"><b>15 KB</b><span>one stylesheet for<br />the entire site</span></div>
+    <div class="stat"><b>4</b><span>ventures on one<br />design system</span></div>
+  </div>
+
+  <div style="height:38px"></div>
+  <div class="brandbar sm">
+    <img src="wiesella.png" alt="Wiesella" />
+    <span class="url">WIESELLA.COM</span>
+  </div>
+</div>
+
+<!-- ============ 3 · THE DETAIL ============ -->
+<div class="board" id="b3">
+  <p class="eyebrow">The detail</p>
+  <h2>Every venture, its&nbsp;own colour.<br /><span class="grad">One codebase.</span></h2>
+
+  <div style="height:44px"></div>
+
+  <div class="compare">
+    <div class="cmp">
+      <img src="shots/interiors-cmp.jpg" alt="Interiors in gold" />
+      <div class="tag"><span class="swatch" style="background:#d4af37"></span> Interiors · Gold</div>
+    </div>
+    <div class="cmp">
+      <img src="shots/evolt-cmp.jpg" alt="Indish eVolt in green" />
+      <div class="tag"><span class="swatch" style="background:#78be46"></span> Indish eVolt · Green</div>
+    </div>
+  </div>
+
+  <div class="code">&lt;Layout theme=<em>"theme-evolt"</em>&gt;</div>
+
+  <p class="lede" style="margin-top:24px;font-size:25px">
+    No component hard-codes a colour. One class on the page re-skins the
+    buttons, borders, icons and glow — so the next venture is a six-line change,
+    not a redesign.
+  </p>
+
+  <div class="spacer"></div>
+  <div class="brandbar sm">
+    <img src="wiesella.png" alt="Wiesella" />
+    <span class="url">WIESELLA.COM</span>
+  </div>
+</div>
+
+<!-- ============ 4 · CTA ============ -->
+<div class="board" id="b4">
+  <div style="height:26px"></div>
+  <p class="eyebrow center" style="color:var(--dim)">Now live</p>
+  <h2 class="center" style="font-size:60px">billiondreamsgroup.com</h2>
+
+  <div style="height:64px"></div>
+  <img class="cta-logo" src="wiesella.png" alt="Wiesella" />
+
+  <div style="height:48px"></div>
+  <h2 class="center" style="font-size:52px">Need a site that<br /><span class="grad">works this hard?</span></h2>
+
+  <div class="services">
+    <span class="chip">Website Development</span>
+    <span class="chip">Digital Marketing</span>
+    <span class="chip">Brand Growth</span>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="center">
+    <span class="btn">wiesella.com
+      <svg viewBox="0 0 24 24" style="width:22px;height:22px" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </span>
+  </div>
+</div>
+
+</body>
+</html>

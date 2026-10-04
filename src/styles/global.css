@@ -680,6 +680,37 @@ a { color: inherit; text-decoration: none; }
 .segment svg { width: 21px; height: 21px; flex: none; color: var(--accent-2); }
 
 
+/* ---------- Built-by credit ----------
+   Agency credit in the footer. Purposely does NOT use --accent-*: Wiesella's
+   own purple should read as a separate brand, not as Billion Dreams gold. */
+.built-by {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 2rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--line);
+  opacity: 0.78;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.built-by:hover,
+.built-by:focus-visible { opacity: 1; transform: translateY(-2px); }
+.built-by-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.built-by img { width: 158px; height: auto; }
+.built-by:hover .built-by-label { color: var(--muted); }
+
+@media (max-width: 520px) {
+  .built-by img { width: 132px; }
+  .built-by-label { letter-spacing: 0.16em; }
+}
+
 /* ---------- Animations ---------- */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 .fade-up { animation: fadeUp 0.8s ease both; }

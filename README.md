@@ -16,6 +16,20 @@ Interiors** in India, and **Majdan Interior Design Consultancy FZ LLC** and
 **Milestone Kitchens** (kitchens & Corian tops) in the UAE. All three are shown,
 with their own logos, in the "Where we operate" block on `/interiors`.
 
+### Credit
+
+The footer carries a "Designed & developed by Wiesella" credit on every page,
+linking to wiesella.com in a new tab (`.built-by` in `global.css`). It
+deliberately does **not** use the `--accent-*` tokens: Wiesella's purple should
+read as a separate brand, not as a Billion Dreams colour.
+
+`brands/wiesella.png` is a reversed lockup built for the dark footer — the mark
+keeps its purple gradient, the near-black wordmark is flipped to white, and the
+tagline and three sub-badges are cropped off because they are illegible at
+credit size. `brands/wiesella-original.png` is the untouched 6250×6250 source.
+It was moved out of `public/`, where it would have been served raw at 6.4 MB on
+every page load; the footer now loads an 8 KB WebP instead.
+
 ### Logos
 
 Two different marks, easy to mix up:
@@ -151,6 +165,12 @@ npm run preview    # serve the built dist/ locally
   with the team before using any of them.
 - 13 kitchen photos were shot sideways (90° rotated) and were skipped pending
   rotation fixes.
+
+## Marketing assets
+
+`marketing/` holds an Instagram carousel presenting this site as a Wiesella case
+study. It sits outside `src/` and `public/`, so it never ships with the build.
+See `marketing/README.md`.
 
 ## Retired URLs
 

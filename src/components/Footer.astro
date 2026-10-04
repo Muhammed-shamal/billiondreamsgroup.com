@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/brands/billion-dreams.png";
+import wiesella from "../assets/brands/wiesella.png";
 
 const year = new Date().getFullYear();
 ---
@@ -37,5 +38,16 @@ const year = new Date().getFullYear();
       <span>© {year} Billion Dreams Group. All rights reserved.</span>
       <span>Dubai · Sharjah · Ras Al Khaimah · Calicut</span>
     </div>
+
+    <a
+      class="built-by"
+      href="https://wiesella.com"
+      target="_blank"
+      rel="noopener"
+      aria-label="Designed and developed by Wiesella — opens wiesella.com in a new tab"
+    >
+      <span class="built-by-label">Designed &amp; developed by</span>
+      <Image src={wiesella} alt="Wiesella — Digital Marketing and Software Solutions" widths={[160, 320]} sizes="160px" />
+    </a>
   </div>
 </footer>
